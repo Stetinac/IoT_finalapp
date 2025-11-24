@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="cs" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Přihlášení</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            color: var(--text-color);
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #0d6efd;
+        }
+        body {
+            background-color: var(--bg-color);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-4">
+
+    <!-- Horní řádek: menu + přepínač tématu -->
+    <div class="d-flex justify-content-end align-items-center mb-3 gap-3">
+        <!-- Přepínač světlo / tma -->
+        <button id="themeToggle" class="btn btn-outline-secondary">
+            <i class="bi bi-moon-stars" id="themeIcon"></i> Přepnout režim
+        </button>
+    </div>
+
+    <!-- Login box -->
+    <div class="login-container">
+        <h2 class="text-center mb-4">Přihlášení</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('login', next=request.args.get('next')) }}">
+            <div class="mb-3">
+                <label for="username" class="form-label">Uživatelské jméno</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Heslo</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Přihlásit se</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center mt-4 py-3">
+    <a href="https://open-meteo.com/" target="_blank" class="text-decoration-none" style="color: var(--text-color);">
+        <span style="font-size: 0.9rem; opacity: 0.8;">Powered by</span><br>
+        <i class="bi bi-cloud fs-2 mt-2"></i>
+    </a>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- Main JS -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+/* ----- BARVY PODLE MOTIVU ----- */
+:root[data-bs-theme="light"] {
+    --bg-color: #f8f9fa;
+    --text-color: #212529;
+    --card-bg: #ffffff;
+    --card-border: #dee2e6;
+    --footer-bg: #e9ecef;
+    --footer-border: #cccccc;
+}
+
+:root[data-bs-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #e9ecef;
+    --card-bg: #1e1e1e;
+    --card-border: #333;
+    --footer-bg: #1a1a1a;
+    --footer-border: #2a2a2a;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.container {
+    flex: 1 0 auto;
+}
+
+.card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--card-border) !important;
+    color: var(--text-color) !important;
+    transition: color 0.5s, background-color 0.5s;
+}
+
+footer {
+    flex-shrink: 0;
+    background-color: var(--footer-bg);
+    color: var(--text-color);
+    border-top: 1px solid var(--footer-border);
+}

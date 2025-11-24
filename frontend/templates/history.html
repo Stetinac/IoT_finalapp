@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="cs" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Historie - Termostat</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<div class="container py-4">
+
+    <!-- Horní řádek: menu + přepínač tématu -->
+    <div class="d-flex justify-content-end align-items-center mb-3 gap-3">
+        <!-- Horizontální menu -->
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a class="nav-link" href="/">Domu</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/history">Historie</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Přepínač světlo / tma -->
+        <button id="themeToggle" class="btn btn-outline-secondary">
+            <i class="bi bi-moon-stars" id="themeIcon"></i> Přepnout režim
+        </button>
+    </div>
+
+    <h3 class="mb-4 text-center">Agregovaná historie za posledních 24 hodin</h3>
+
+    <!-- Karta pro graf -->
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-3">Historická data</h5>
+                    <div id="historyContainer">
+                        <!-- Graf se vloží sem -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="text-center mt-4 py-3">
+    <a href="https://open-meteo.com/" target="_blank" class="text-decoration-none" style="color: var(--text-color);">
+        <span style="font-size: 0.9rem; opacity: 0.8;">Powered by</span><br>
+        <i class="bi bi-cloud fs-2 mt-2"></i>
+    </a>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- Hlavní JS -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<!-- Graf JS -->
+<script src="{{ url_for('static', filename='js/graf.js') }}"></script>
+
+</body>
+</html>

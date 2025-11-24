@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="cs" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Termostat</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container py-4">
+
+<!-- Horní řádek: menu + přepínač tématu -->
+<div class="d-flex justify-content-end align-items-center mb-3 gap-3">
+    <!-- Horizontální menu -->
+    <nav>
+        <ul class="nav">
+            <li class="nav-item"><a class="nav-link" href="/">Domu</a></li>
+            <li class="nav-item"><a class="nav-link" href="/history">Historie</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Přepínač světlo / tma -->
+    <button id="themeToggle" class="btn btn-outline-secondary">
+        <i class="bi bi-moon-stars" id="themeIcon"></i> Přepnout režim
+    </button>
+</div>
+
+    <h3 class="mb-4 text-center">Termostat</h3>
+
+    <!-- PRVNÍ ŘADA – senzory, vystředěná -->
+    <div class="row g-3 text-center justify-content-center">
+
+        <!-- Teplota -->
+        <div class="col-12 col-sm-6 col-md-2" id="temperature">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-thermometer-half fs-1 text-primary"></i>
+                    <h5 class="card-title mt-2">Teplota</h5>
+                    <p class="card-text fs-3 fw-bold">Načítám…</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tlak -->
+        <div class="col-12 col-sm-6 col-md-2" id="pressure">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-speedometer2 fs-1 text-success"></i>
+                    <h5 class="card-title mt-2">Tlak</h5>
+                    <p class="card-text fs-3 fw-bold">Načítám…</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vlhkost -->
+        <div class="col-12 col-sm-6 col-md-2" id="humidity">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-droplet fs-1 text-info"></i>
+                    <h5 class="card-title mt-2">Vlhkost</h5>
+                    <p class="card-text fs-3 fw-bold">Načítám…</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rosný bod -->
+        <div class="col-12 col-sm-6 col-md-2" id="dewPoint">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-cloud-rain fs-1 text-warning"></i>
+                    <h5 class="card-title mt-2">Rosný bod</h5>
+                    <p class="card-text fs-3 fw-bold">Načítám…</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Venkovní teplota – vlastní řádek, vystředěná -->
+    <div class="row g-3 text-center justify-content-center mt-3">
+        <div class="col-12 col-sm-6 col-md-2" id="outTemp">
+            <div class="card shadow-sm border-primary">
+                <div class="card-body">
+                    <i class="bi bi-geo-alt fs-1 text-danger"></i>
+                    <h5 class="card-title mt-2">Venkovní teplota</h5>
+                    <p class="card-text fs-3 fw-bold">Načítám…</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DRUHÁ ŘADA – Přepínače na vlastním řádku, vystředěné -->
+    <div class="row g-3 text-center justify-content-center mt-3">
+
+        <!-- Automat -->
+        <div class="col-12 col-sm-6 col-md-2 d-flex justify-content-center">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <label class="form-check-label mb-2" for="automat">Automat</label>
+                    <div class="form-check form-switch d-flex justify-content-center">
+                        <input class="form-check-input" type="checkbox" id="automat">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topení -->
+        <div class="col-12 col-sm-6 col-md-2 d-flex justify-content-center">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <label class="form-check-label mb-2" for="heating">Topení</label>
+                    <div class="form-check form-switch d-flex justify-content-center">
+                        <input class="form-check-input" type="checkbox" id="heating">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TŘETÍ ŘADA – Slider na vlastním řádku, vystředěný -->
+    <div class="row g-3 justify-content-center mt-3">
+        <div class="col-12 col-sm-8 col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <label for="desire_temp" class="form-label">Cílová teplota</label>
+                    <input type="range"
+                           class="form-range"
+                           min="-10"
+                           max="40"
+                           step="0.5"
+                           id="desire_temp">
+                    <p class="mt-2">
+                        Hodnota: <span id="sliderValue">20</span> °C
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="text-center mt-4 py-3">
+    <a href="https://open-meteo.com/" target="_blank" class="text-decoration-none" style="color: var(--text-color);">
+        <span style="font-size: 0.9rem; opacity: 0.8;">Powered by</span><br>
+        <i class="bi bi-cloud fs-2 mt-2"></i>
+    </a>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<!-- Main JS -->
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

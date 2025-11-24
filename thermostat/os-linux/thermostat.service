@@ -1,0 +1,17 @@
+[Unit]
+Description=Thermostat Service
+After=network.target
+
+[Service]
+Type=exec
+User=zarofka
+Group=zarofka
+WorkingDirectory=/opt/iot/termostat
+
+ExecStart=/opt/iot/termostat/venv/bin/python /opt/iot/termostat/main.py
+Restart=always
+RestartSec=5
+#Environment="PATH=/opt/iot/thermostat/venv/bin:/usr/bin:/bin"
+
+[Install]
+WantedBy=multi-user.target
