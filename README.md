@@ -1,4 +1,3 @@
-```markdown
 # 🏠 Domácí Termostat - finální úloha
 
 ---
@@ -108,4 +107,5 @@ Projekt je rozdělen do tří hlavních modulů:
 ## Zapojeni sezoru, LED (představuje rele) a RPi
 
 ![RPi and BME280 wiring](wiring_rpi.png)
+
 
