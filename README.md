@@ -57,7 +57,7 @@ Projekt je rozdělen do tří hlavních modulů:
 ---
 
 ## 📁 Struktura projektu
-```
+
 ├── data_logger/           # Modul pro snímání dat ze senzoru
 │   ├── zapis_dat.py       # Hlavní skript pro čtení a zápis do DB
 │   └── data-logger.sh     # Bash script spoutěný Cronem
@@ -75,8 +75,6 @@ Projekt je rozdělen do tří hlavních modulů:
     ├── meteoapi.py        # Modul pro Gunicorn
     ├── templates/         # HTML šablony
     └── static/            # CSS, JS, obrázky
-```
-
 ---
 
 ## ⚙️ Popis požadavků na systém
@@ -110,3 +108,4 @@ Projekt je rozdělen do tří hlavních modulů:
 ## Zapojeni sezoru, LED (představuje rele) a RPi
 
 ![RPi and BME280 wiring](wiring_rpi.png)
+
